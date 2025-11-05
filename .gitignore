@@ -1,0 +1,20 @@
+# Editor/OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# Node and build artifacts
+node_modules/
+dist/
+build/
+*.log
+
+# OS metadata
+Desktop.ini
+$RECYCLE.BIN/
+
+# Python/venv (se usar futuramente)
+.venv/
+__pycache__/
+assets/video/campanha.mp4

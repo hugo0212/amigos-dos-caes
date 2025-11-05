@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Amigos dos Cães - Blog</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner container">
+    <a class="logo" href="index.html">Amigos dos Cães</a>
+    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="index.html">Início</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="projetos.html">Projetos</a>
+      <a href="voluntariado.html">Voluntariado</a>
+      <a href="doacoes.html">Doações</a>
+      <a href="transparencia.html">Transparência</a>
+      <a href="contato.html">Contato</a>
+      <a href="blog.html">Blog</a>
+    </nav>
+  </div>
+</header>
+<main class="container">
+  <h1>Blog/Notícias</h1>
+  <div id="posts" class="card-grid"></div>
+</main>
+<footer>
+  <p>&copy; 2025 Amigos dos Cães</p>
+</footer>
+<script src="js/main.js"></script>
+<script>
+// Popular alguns posts fictícios
+document.addEventListener('DOMContentLoaded', function(){
+  const posts = document.getElementById('posts');
+  if(!posts) return;
+  const data = [
+    {t:'Mutirão de castração no sábado',d:'Leve seu cão ou indique cães de rua do seu bairro. Atendimento por ordem de chegada.'},
+    {t:'Feira de adoção — Parque Central',d:'Domingo, das 10h às 16h. Traga 1kg de ração para participar do sorteio solidário.'},
+    {t:'Como preparar sua casa para adoção',d:'Checklist simples para receber o novo amigo com segurança e carinho.'}
+  ];
+  data.forEach(p=>{
+    const el = document.createElement('article');
+    el.className = 'card';
+    el.innerHTML = `<h3>${p.t}</h3><p>${p.d}</p><p><a class="btn btn-outline" href="#">Ler mais</a></p>`;
+    posts.appendChild(el);
+  })
+});
+</script>
+</body>
+</html>

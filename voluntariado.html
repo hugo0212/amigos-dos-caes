@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Amigos dos Cães - Voluntariado</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner container">
+    <a class="logo" href="index.html">Amigos dos Cães</a>
+    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="index.html">Início</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="projetos.html">Projetos</a>
+      <a href="voluntariado.html">Voluntariado</a>
+      <a href="doacoes.html">Doações</a>
+      <a href="transparencia.html">Transparência</a>
+      <a href="contato.html">Contato</a>
+      <a href="blog.html">Blog</a>
+    </nav>
+  </div>
+</header>
+<main class="container">
+  <h1>Voluntariado</h1>
+  <p>Participe das ações de resgate, cuidados no abrigo, lar temporário e feiras de adoção.</p>
+  <form id="form-voluntario" class="form">
+    <label for="v-nome">Nome</label>
+    <input id="v-nome" name="v-nome" required>
+
+    <label for="v-email">Email</label>
+    <input type="email" id="v-email" name="v-email" required>
+
+    <label for="v-telefone">Telefone</label>
+    <input id="v-telefone" name="v-telefone" data-mask="telefone">
+
+    <label for="v-cpf">CPF</label>
+    <input id="v-cpf" name="v-cpf" data-mask="cpf">
+
+    <label for="v-cep">CEP</label>
+    <input id="v-cep" name="v-cep" data-mask="cep">
+
+    <label for="v-endereco">Endereço</label>
+    <input id="v-endereco" name="endereco">
+
+    <label for="v-bairro">Bairro</label>
+    <input id="v-bairro" name="bairro">
+
+    <label for="v-cidade">Cidade</label>
+    <input id="v-cidade" name="cidade">
+
+    <label for="v-uf">UF</label>
+    <input id="v-uf" name="uf">
+
+    <label for="v-motivacao">Áreas de interesse / motivação</label>
+    <textarea id="v-motivacao" name="v-motivacao" placeholder="Ex.: resgate, lar temporário, transporte, redes sociais"></textarea>
+
+    <button type="submit">Enviar</button>
+  </form>
+</main>
+<footer>
+  <p>&copy; 2025 Amigos dos Cães</p>
+</footer>
+<script src="js/main.js"></script>
+<script src="js/forms.js"></script>
+</body>
+</html>

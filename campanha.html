@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Campanha - Cães Abandonados</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+      /* Regras mínimas específicas para esta página */
+      .hero {
+        background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.15)), url('assets/images/img1.svg') center/cover no-repeat;
+        color: #fff;
+        padding: 4rem 1rem;
+        text-align: center;
+        border-bottom: 6px solid #d58a33;
+      }
+      .hero h1{ font-size:2.4rem; margin:0 0 .5rem }
+      .hero p{ max-width:800px; margin:0 auto 1.2rem }
+      .container{ max-width:1100px; margin:2rem auto; padding:0 1rem }
+      .grid-3{ display:flex; gap:1rem; flex-wrap:wrap }
+      .card{ background:#fff; padding:1.2rem; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,.06); flex:1 1 30% }
+      .cta { display:inline-block; background:#d58a33; color:#fff; padding:.8rem 1.2rem; border-radius:6px; text-decoration:none }
+      .video-wrap{ text-align:center; margin:1.2rem 0 }
+      .video-wrap video{ max-width:100%; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,.12) }
+      form .row{ display:flex; gap:.8rem; flex-wrap:wrap }
+      form input, form select, form textarea{ width:100%; padding:.6rem; border:1px solid #ddd; border-radius:6px }
+      @media(max-width:800px){ .grid-3{ flex-direction:column } }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <h1>Campanha: Cães Abandonados nas Ruas</h1>
+      <p>Ajude a reduzir o abandono e garantir cuidados para cães em situação de rua — adote, apoie financeiramente ou torne-se voluntário.</p>
+      <a class="cta" href="#como-ajudar">Quero Ajudar</a>
+    </header>
+
+    <main>
+      <section class="container video-wrap" aria-labelledby="video-titulo">
+        <h2 id="video-titulo">Assista ao vídeo da campanha</h2>
+        <video controls poster="assets/images/thumb_mid.jpg">
+          <source src="assets/video/source.mp4" type="video/mp4">
+          Seu navegador não suporta o elemento de vídeo.
+        </video>
+        <p style="font-size:.95rem;color:#555;margin-top:.6rem">Duração: aproximadamente — (se precisar eu extraio a duração exata e crio um corte promocional)</p>
+      </section>
+
+      <section id="sobre" class="container">
+        <h2>Sobre a campanha</h2>
+        <p>A campanha tem como objetivo recolher recursos e voluntários para promover a captura humanitária, tratamento, castração e reencontro com famílias responsáveis. Trabalhamos com abrigos locais e rede de protetores para aumentar as chances de adoção.</p>
+      </section>
+
+      <section id="como-ajudar" class="container">
+        <h2>Como Ajudar</h2>
+        <div class="grid-3">
+          <article class="card">
+            <h3>Doação</h3>
+            <p>Contribua com ração, remédios ou valor em dinheiro para manutenção dos abrigos e tratamentos.</p>
+            <p><a href="#contato" class="cta">Doe Agora</a></p>
+          </article>
+          <article class="card">
+            <h3>Adote</h3>
+            <p>Adotar é transformar a vida de um animal. Faça o cadastro e conheça cães que precisam de um lar.</p>
+            <p><a href="#cadastro" class="cta">Quero Adotar</a></p>
+          </article>
+          <article class="card">
+            <h3>Voluntarie-se</h3>
+            <p>Ajude nas ações de resgate, abrigo e eventos de adoção — seu tempo muda destinos.</p>
+            <p><a href="#cadastro" class="cta">Seja Voluntário</a></p>
+          </article>
+        </div>
+      </section>
+
+      <section id="cadastro" class="container" aria-labelledby="cadastro-titulo">
+        <h2 id="cadastro-titulo">Cadastro Rápido</h2>
+        <form id="campaign-form" style="max-width:700px;margin:0 auto;">
+          <div class="row">
+            <div style="flex:1"><label>Nome completo</label><input name="nome" required></div>
+            <div style="flex:1"><label>Telefone</label><input name="telefone" placeholder="(00) 9 9999-9999"></div>
+          </div>
+          <div style="margin-top:.6rem"><label>E-mail</label><input name="email" type="email" required></div>
+          <div style="margin-top:.6rem"><label>Interesse</label>
+            <select name="interesse">
+              <option>Adotar</option>
+              <option>Doar</option>
+              <option>Voluntariar</option>
+            </select>
+          </div>
+          <div style="margin-top:.6rem"><label>Mensagem (opcional)</label><textarea name="mensagem" rows="3"></textarea></div>
+          <p style="text-align:center;margin-top:1rem"><button type="submit" class="cta">Enviar Cadastro</button></p>
+          <p id="form-msg" role="status" aria-live="polite" style="text-align:center;color:green;display:none">Enviado com sucesso — entraremos em contato.</p>
+        </form>
+      </section>
+
+      <section id="contato" class="container">
+        <h2>Contato</h2>
+        <p>Para doações grandes, logística ou parcerias envie e-mail: <strong>contato@campanhacachorros.org</strong> ou ligue (11) 9 9999-9999.</p>
+      </section>
+    </main>
+
+    <footer style="background:#d58a33;color:#fff;padding:1rem;text-align:center;margin-top:2rem">&copy; 2025 Campanha Cães Abandonados. Todos os direitos reservados.</footer>
+
+    <script>
+      // comportamento simples para o formulário
+      document.getElementById('campaign-form').addEventListener('submit', function(e){
+        e.preventDefault();
+        // aqui podemos salvar localStorage ou enviar via fetch para backend
+        document.getElementById('form-msg').style.display='block';
+        setTimeout(()=>{ document.getElementById('form-msg').style.display='none'; this.reset(); }, 2200);
+      });
+    </script>
+  </body>
+</html>

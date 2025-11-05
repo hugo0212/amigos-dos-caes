@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Amigos dos Cães - Contato</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner container">
+    <a class="logo" href="index.html">Amigos dos Cães</a>
+    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="index.html">Início</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="projetos.html">Projetos</a>
+      <a href="voluntariado.html">Voluntariado</a>
+      <a href="doacoes.html">Doações</a>
+      <a href="transparencia.html">Transparência</a>
+      <a href="contato.html">Contato</a>
+      <a href="blog.html">Blog</a>
+    </nav>
+  </div>
+</header>
+<main class="container">
+  <h1>Contato</h1>
+  <p>Fale com a equipe para adotar, doar itens ou reportar um cão em situação de risco.</p>
+  <form id="form-contato" class="form">
+    <label for="c-nome">Nome</label>
+    <input id="c-nome" name="c-nome" required>
+
+    <label for="c-email">Email</label>
+    <input type="email" id="c-email" name="c-email" required>
+
+    <label for="c-cep">CEP</label>
+    <input id="c-cep" name="c-cep" data-mask="cep">
+
+    <label for="c-endereco">Endereço</label>
+    <input id="c-endereco" name="endereco">
+
+    <label for="c-mensagem">Mensagem</label>
+    <textarea id="c-mensagem" name="c-mensagem" placeholder="Descreva como podemos ajudar (ex.: resgate urgente, adoção, doações)" required></textarea>
+
+    <button type="submit">Enviar</button>
+  </form>
+</main>
+<footer>
+  <p>&copy; 2025 Amigos dos Cães</p>
+</footer>
+<script src="js/main.js"></script>
+<script src="js/forms.js"></script>
+</body>
+</html>
