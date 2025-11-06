@@ -58,7 +58,14 @@ header.site-header{
 .menu-toggle{display:none;background:transparent;color:var(--text-on-dark);border:1px solid rgba(255,255,255,.4);font-size:1.1rem;padding:8px;border-radius:8px}
 
 /* Hero */
-.hero{padding:48px 0;background:linear-gradient(90deg, rgba(213,138,51,0.08), rgba(213,138,51,0.03))}
+.hero{
+	padding:48px 0;
+	background:linear-gradient(90deg, rgba(213,138,51,0.08), rgba(213,138,51,0.03));
+	/* Full-bleed: ocupa 100% da largura da viewport sem criar bordas em qualquer zoom */
+	position: relative;
+	margin-left: calc(50% - 50vw);
+	margin-right: calc(50% - 50vw);
+}
 .hero.hero-dog{
 	color:#fff;
 	background:
