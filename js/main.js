@@ -46,12 +46,8 @@
   function setupTheme(){
     const root = document.documentElement;
     const saved = localStorage.getItem('theme');
-    if(saved){ root.setAttribute('data-theme', saved); }
-    else {
-      // usar preferência do sistema
-      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      root.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-    }
+    // Padrão: claro SEM seguir o tema do sistema (garante layout do print)
+    root.setAttribute('data-theme', saved ? saved : 'light');
     const btn = document.getElementById('theme-toggle');
     if(btn){
       const apply = () => {
