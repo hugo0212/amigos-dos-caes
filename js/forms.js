@@ -67,18 +67,29 @@
     }
   }, true);
 
-  function showErrors(form, errors){
-    // limpa anteriores
+  function clearErrors(form){
     form.querySelectorAll('.field-error').forEach(el=>el.remove());
-    errors.forEach(err=>{
+    form.querySelectorAll('[aria-invalid="true"]').forEach(el=>{
+      el.setAttribute('aria-invalid','false');
+      el.removeAttribute('aria-describedby');
+    });
+  }
+
+  function showErrors(form, errors){
+    clearErrors(form);
+    errors.forEach((err, idx)=>{
       const field = form.querySelector(`[name="${err.name}"]`) || document.getElementById(err.name);
       if(!field) return;
+      const id = `${err.name}-error-${idx}`;
       const msg = document.createElement('div');
+      msg.id = id;
       msg.className = 'field-error';
       msg.style.color = '#b00020';
       msg.style.fontSize = '.85rem';
       msg.style.marginTop = '.25rem';
       msg.textContent = err.message;
+      field.setAttribute('aria-invalid','true');
+      field.setAttribute('aria-describedby', id);
       field.insertAdjacentElement('afterend', msg);
     });
   }
@@ -111,7 +122,8 @@
       alert('Preencha os campos obrigatórios.');
       return false;
     }
-    // Envio simulado
+    // limpar erros, envio simulado
+    clearErrors(form);
     e.preventDefault();
     alert('Formulário válido - envio simulado.');
   }, true);

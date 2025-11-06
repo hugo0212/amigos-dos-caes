@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hugo0212.github.io/amigos-dos-caes/sitemap.xml
