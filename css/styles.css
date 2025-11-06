@@ -1,15 +1,15 @@
 /* Design base atualizado */
 :root{
-	/* Paleta adaptada para a temática de cães (tema claro) */
-	--accent: #d97706;          /* laranja forte, bom contraste */
-	--accent-600: #b45309;      /* laranja escuro */
-	--muted: #4b5563;
+	/* Paleta anterior (voltar para o layout de cores anterior) */
+	--accent: #d58a33;          /* laranja quente */
+	--accent-600: #b8731f;      /* laranja mais escuro */
+	--muted: #6b7280;
 	--bg: #f6f1e8;              /* bege claro e quente */
 	--card-bg: #ffffff;
-	--text: #111827;            /* contraste 14+:1 sobre o fundo */
+	--text: #111827;            /* texto padrão */
 	--text-on-dark: #ffffff;
 	--radius: 10px;
-	--focus: #2563eb;           /* azul acessível para foco */
+	--focus: #2563eb;           /* foco acessível */
 	--max-width: 1200px;        /* um pouco mais largo para reduzir bordas laterais */
 }
 
@@ -66,14 +66,7 @@ header.site-header{
 		url('../assets/images/dog-rain.jpg') center/cover no-repeat;
 }
 
-/* Em telas grandes, usar imagem em alta resolução para evitar perda de nitidez */
-@media (min-width: 1280px){
-	.hero.hero-dog{
-		background:
-			linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.15)),
-			url('https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=1920&q=85') center/cover no-repeat;
-	}
-}
+/* Removido override de imagem em telas grandes para manter a foto anterior sempre */
 
 .hero-inner{max-width:780px}
 .hero h1{font-size:2rem;margin:0 0 12px}
