@@ -1,0 +1,161 @@
+// templates.js - funções de template em JavaScript
+// Cada view retorna uma string HTML que será inserida em #app
+
+const T = {
+  home(){
+    return `
+      <section class="hero hero-dog">
+        <div class="container hero-inner">
+          <h1>Resgate, cuidado e adoção de cães em situação de rua</h1>
+          <p>Unimos voluntários e doadores para transformar a vida de cães abandonados com resgate responsável, tratamento e adoção.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="#/doacoes">Quero Doar</a>
+            <a class="btn btn-outline on-dark" href="#/voluntariado">Seja Voluntário</a>
+            <a class="btn btn-outline on-dark" href="#/projetos">Conheça os Projetos</a>
+          </div>
+        </div>
+      </section>
+      <section class="home-help">
+        <h2>Como Ajudar</h2>
+        <div class="card-grid">
+          <article class="card" role="article">
+            <img loading="lazy" class="responsive" src="https://images.unsplash.com/photo-1525253086316-d0c936c814f8?auto=format&fit=crop&w=400&q=80" alt="Cachorro abandonado recebendo doação de comida">
+            <h3>Doação</h3>
+            <p>Ração, medicamentos ou contribuição financeira mantêm o resgate funcionando.</p>
+            <p><a class="btn btn-outline" href="#/doacoes">Saiba Mais</a></p>
+          </article>
+          <article class="card" role="article">
+            <img loading="lazy" class="responsive" src="assets/images/participe.jpg" alt="Cachorro na estrada aguardando ajuda">
+            <h3>Participe</h3>
+            <p>Ajude em resgates, feiras de adoção e cuidados temporários (lar temporário).</p>
+            <p><a class="btn btn-outline" href="#/voluntariado">Saiba Mais</a></p>
+          </article>
+          <article class="card" role="article">
+            <img loading="lazy" class="responsive" src="assets/images/divulgue.jpg" alt="Cachorro molhado em close apelando por ajuda">
+            <h3>Divulgue</h3>
+            <p>Compartilhe campanhas e histórias para aumentar adoções e arrecadações.</p>
+            <p><a class="btn btn-outline" href="#/blog">Saiba Mais</a></p>
+          </article>
+        </div>
+      </section>
+      <section>
+        <h2>Vídeo da Campanha</h2>
+        <div class="card">
+          <video controls width="100%" preload="metadata" poster="assets/images/dog-rain.jpg">
+            <source src="assets/video/placeholder.mp4" type="video/mp4">
+            Seu navegador não suporta vídeo.
+          </video>
+          <p style="margin:.5rem 0 0;color:#6b7280;font-size:.9rem">Observação: versão leve para web. O vídeo original foi mantido localmente (não enviado ao GitHub devido ao limite de 100 MB).</p>
+        </div>
+      </section>
+    `;
+  },
+  sobre(){
+    return `
+      <h1>Sobre a ONG</h1>
+      <p>Somos uma rede de resgate e proteção animal focada em cães em situação de rua. Atuamos em parceria com abrigos e protetores para resgatar, tratar, castrar e encaminhar para adoção responsável.</p>
+      <p>Nossa visão é uma cidade onde nenhum cão seja invisível. Transparência, respeito e bem-estar animal guiam nossas ações.</p>
+    `;
+  },
+  projetos(){
+    return `
+      <h1>Projetos</h1>
+      <div id="projects-list" class="card-grid"></div>
+    `;
+  },
+  voluntariado(){
+    return `
+      <h1>Voluntariado</h1>
+      <p>Participe das ações de resgate, cuidados no abrigo, lar temporário e feiras de adoção.</p>
+      <form id="form-voluntario" class="form" data-autosave="true">
+        <label for="v-nome">Nome</label>
+        <input id="v-nome" name="v-nome" required>
+
+        <label for="v-email">Email</label>
+        <input type="email" id="v-email" name="v-email" required>
+
+        <label for="v-telefone">Telefone</label>
+        <input id="v-telefone" name="v-telefone" data-mask="telefone">
+
+        <label for="v-cpf">CPF</label>
+        <input id="v-cpf" name="v-cpf" data-mask="cpf">
+
+        <label for="v-cep">CEP</label>
+        <input id="v-cep" name="v-cep" data-mask="cep">
+
+        <label for="v-endereco">Endereço</label>
+        <input id="v-endereco" name="endereco">
+
+        <label for="v-bairro">Bairro</label>
+        <input id="v-bairro" name="bairro">
+
+        <label for="v-cidade">Cidade</label>
+        <input id="v-cidade" name="cidade">
+
+        <label for="v-uf">UF</label>
+        <input id="v-uf" name="uf">
+
+        <label for="v-motivacao">Áreas de interesse / motivação</label>
+        <textarea id="v-motivacao" name="v-motivacao" placeholder="Ex.: resgate, lar temporário, transporte, redes sociais"></textarea>
+
+        <button type="submit">Enviar</button>
+      </form>
+    `;
+  },
+  doacoes(){
+    return `
+      <h1>Doações</h1>
+      <p>Doe qualquer valor para apoiar resgates, tratamentos e castrações. Também aceitamos ração, medicamentos e itens de higiene.</p>
+      <form id="form-doacao" class="form" data-autosave="true">
+        <label>Nome</label>
+        <input name="nome" required>
+        <label>Email</label>
+        <input type="email" name="email" required>
+        <label>Valor</label>
+        <input type="number" name="valor" min="5" step="1" required>
+        <button type="submit">Confirmar Doação</button>
+      </form>
+    `;
+  },
+  transparencia(){
+    return `
+      <h1>Transparência</h1>
+      <p>Publicamos relatórios e prestações de contas para garantir transparência total sobre o uso de recursos.</p>
+      <ul>
+        <li>Relatório Trimestral - Q1</li>
+        <li>Relatório Trimestral - Q2</li>
+      </ul>
+    `;
+  },
+  contato(){
+    return `
+      <h1>Contato</h1>
+      <form id="form-contato" class="form" data-autosave="true">
+        <label>Nome</label>
+        <input name="nome" required>
+        <label>Email</label>
+        <input type="email" name="email" required>
+        <label>Mensagem</label>
+        <textarea name="mensagem" required></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    `;
+  },
+  blog(){
+    return `
+      <h1>Blog</h1>
+      <article class="card"><h3>Resgate no bairro central</h3><p>História de superação e adoção.</p></article>
+      <article class="card"><h3>Dicas para adoção responsável</h3><p>O que considerar antes de adotar um cão.</p></article>
+    `;
+  },
+  graficos(){
+    return `
+      <h1>Gráficos</h1>
+      <div class="card-grid">
+        <div class="card"><canvas id="chartPie" width="400" height="300"></canvas></div>
+        <div class="card"><canvas id="chartLine" width="400" height="300"></canvas></div>
+        <div class="card"><canvas id="chartBar" width="400" height="300"></canvas></div>
+      </div>
+    `;
+  }
+};

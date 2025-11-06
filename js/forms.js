@@ -1,4 +1,4 @@
-// forms.js - máscaras simples e integração ViaCEP (JS puro)
+// forms.js - máscaras, validação e ViaCEP (delegado, compatível com SPA)
 (function(){
   function setInputFilter(textbox, inputFilter) {
     textbox.addEventListener('input', function() {
@@ -37,44 +37,85 @@
       .catch(()=>onError && onError());
   }
 
-  document.addEventListener('DOMContentLoaded', function(){
-    document.querySelectorAll('input[data-mask="telefone"]').forEach(inp=>{
-      inp.addEventListener('input', e=>{ e.target.value = maskTelefone(e.target.value); });
-    });
-    document.querySelectorAll('input[data-mask="cpf"]').forEach(inp=>{
-      inp.addEventListener('input', e=>{ e.target.value = maskCPF(e.target.value); });
-    });
-    document.querySelectorAll('input[data-mask="cep"]').forEach(inp=>{
-      inp.addEventListener('input', e=>{ e.target.value = maskCEP(e.target.value); });
-      inp.addEventListener('blur', function(e){
-        const val = e.target.value;
-        fetchViaCEP(val, function(data){
-          // preencher campos se existirem
-          const endereco = document.querySelector('[name="endereco"]');
-          const bairro = document.querySelector('[name="bairro"]');
-          const cidade = document.querySelector('[name="cidade"]');
-          const uf = document.querySelector('[name="uf"]');
-          if(endereco) endereco.value = data.logradouro || '';
-          if(bairro) bairro.value = data.bairro || '';
-          if(cidade) cidade.value = data.localidade || '';
-          if(uf) uf.value = data.uf || '';
-        }, function(){ /* ignore error */ });
-      });
-    });
-
-    // validação simples: required e formato email
-    document.querySelectorAll('form').forEach(form=>{
-      form.addEventListener('submit', function(e){
-        const invalid = Array.from(form.elements).some(el=>{
-          if(el.hasAttribute('required')){
-            return !el.value || el.value.trim() === '';
-          }
-          return false;
-        });
-        if(invalid){ e.preventDefault(); alert('Preencha os campos obrigatórios.'); return false; }
-        // simular envio
-        e.preventDefault(); alert('Formulário válido - envio simulado.');
-      })
-    });
+  // Delegação de eventos para máscaras
+  document.addEventListener('input', function(e){
+    const t = e.target;
+    if(!(t instanceof HTMLInputElement)) return;
+    const mask = t.getAttribute('data-mask');
+    if(mask === 'telefone') t.value = maskTelefone(t.value);
+    if(mask === 'cpf') t.value = maskCPF(t.value);
+    if(mask === 'cep') t.value = maskCEP(t.value);
   });
+
+  // ViaCEP no blur do campo CEP
+  document.addEventListener('blur', function(e){
+    const t = e.target;
+    if(!(t instanceof HTMLInputElement)) return;
+    if(t.getAttribute('data-mask') === 'cep'){
+      const val = t.value;
+      fetchViaCEP(val, function(data){
+        const root = t.closest('form') || document;
+        const endereco = root.querySelector('[name="endereco"]');
+        const bairro = root.querySelector('[name="bairro"]');
+        const cidade = root.querySelector('[name="cidade"]');
+        const uf = root.querySelector('[name="uf"]');
+        if(endereco) endereco.value = data.logradouro || '';
+        if(bairro) bairro.value = data.bairro || '';
+        if(cidade) cidade.value = data.localidade || '';
+        if(uf) uf.value = data.uf || '';
+      }, function(){ /* ignore error */ });
+    }
+  }, true);
+
+  function showErrors(form, errors){
+    // limpa anteriores
+    form.querySelectorAll('.field-error').forEach(el=>el.remove());
+    errors.forEach(err=>{
+      const field = form.querySelector(`[name="${err.name}"]`) || document.getElementById(err.name);
+      if(!field) return;
+      const msg = document.createElement('div');
+      msg.className = 'field-error';
+      msg.style.color = '#b00020';
+      msg.style.fontSize = '.85rem';
+      msg.style.marginTop = '.25rem';
+      msg.textContent = err.message;
+      field.insertAdjacentElement('afterend', msg);
+    });
+  }
+
+  function validateForm(form){
+    const errors = [];
+    Array.from(form.elements).forEach(el=>{
+      if(!(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement || el instanceof HTMLSelectElement)) return;
+      const name = el.name || el.id;
+      if(el.hasAttribute('required') && (!el.value || el.value.trim()==='')){
+        errors.push({name, message:'Campo obrigatório.'});
+      }
+      if(el.type === 'email' && el.value){
+        const ok = /.+@.+\..+/.test(el.value);
+        if(!ok) errors.push({name, message:'Email inválido.'});
+      }
+    });
+    return errors;
+  }
+
+  // Validação por delegação
+  document.addEventListener('submit', function(e){
+    const form = e.target;
+    if(!(form instanceof HTMLFormElement)) return;
+    const errors = validateForm(form);
+    if(errors.length){
+      e.preventDefault();
+      showErrors(form, errors);
+      form.querySelector('.field-error')?.scrollIntoView({behavior:'smooth', block:'center'});
+      alert('Preencha os campos obrigatórios.');
+      return false;
+    }
+    // Envio simulado
+    e.preventDefault();
+    alert('Formulário válido - envio simulado.');
+  }, true);
+
+  // API pública para reuso na SPA
+  window.Forms = { validateForm };
 })();
