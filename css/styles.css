@@ -110,6 +110,11 @@ footer{padding:18px;text-align:center;color:var(--muted);font-size:0.95rem}
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px}
 [data-theme="dark"] :focus-visible{outline-color:#93c5fd}
 
+/* Respeito a prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce){
+	*{scroll-behavior: auto;}
+}
+
 /* Centralização da seção "Como Ajudar" na home */
 .home-help{ text-align:center }
 .home-help .card-grid{
