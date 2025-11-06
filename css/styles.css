@@ -1,13 +1,26 @@
 /* Design base atualizado */
 :root{
-	/* Paleta adaptada para a temática de cães */
-	--accent: #d58a33;          /* laranja quente */
-	--accent-600: #b8731f;      /* laranja mais escuro */
-	--muted: #6b7280;
+	/* Paleta adaptada para a temática de cães (tema claro) */
+	--accent: #d97706;          /* laranja forte, bom contraste */
+	--accent-600: #b45309;      /* laranja escuro */
+	--muted: #4b5563;
 	--bg: #f6f1e8;              /* bege claro e quente */
 	--card-bg: #ffffff;
+	--text: #111827;            /* contraste 14+:1 sobre o fundo */
+	--text-on-dark: #ffffff;
 	--radius: 10px;
+	--focus: #2563eb;           /* azul acessível para foco */
 	--max-width: 1200px;        /* um pouco mais largo para reduzir bordas laterais */
+}
+
+[data-theme="dark"]{
+	--bg: #0b0f14;
+	--card-bg: #0f172a; /* slate-900 */
+	--text: #e5e7eb;
+	--muted: #cbd5e1;
+	--accent: #fb923c;
+	--accent-600: #f97316;
+	--text-on-dark: #ffffff;
 }
 
 *{box-sizing:border-box}
@@ -18,26 +31,31 @@ body{
 	/* Fundo com leve gradiente para preencher bem telas grandes */
 	background:
 		radial-gradient(1200px 600px at 50% -120px, rgba(213,138,51,0.08), rgba(213,138,51,0) 60%),
-		linear-gradient(180deg, #f6f1e8 0%, #f2ece3 40%, #efe6da 100%);
-	color:#111827;
+		linear-gradient(180deg, var(--bg) 0%, #f2ece3 40%, #efe6da 100%);
+	color:var(--text);
 	-webkit-font-smoothing:antialiased;
+}
+
+[data-theme="dark"] body, [data-theme="dark"]{
+	background: linear-gradient(180deg, var(--bg) 0%, #0c1117 100%);
 }
 
 /* Container central */
 .container{max-width:var(--max-width);width:min(92vw, var(--max-width));margin:0 auto;padding:0 20px}
 
 /* Header */
+[data-theme="dark"] header.site-header{ background: linear-gradient(180deg, rgba(17,24,39,0.95), rgba(17,24,39,0.85)); }
 header.site-header{
 	background: linear-gradient(180deg, rgba(213,138,51,0.95), rgba(213,138,51,0.85));
-	color:#fff;
+	color:var(--text-on-dark);
 	border-bottom: 1px solid rgba(0,0,0,.08);
 }
 .header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
 .logo{font-weight:800;color:#fff;text-decoration:none;font-size:1.35rem;letter-spacing:.2px}
 .nav-links{display:flex;gap:18px;align-items:center}
-.nav-links a{color:#fff;text-decoration:none;padding:8px;border-radius:8px}
+.nav-links a{color:var(--text-on-dark);text-decoration:none;padding:8px;border-radius:8px}
 .nav-links a:hover{background:rgba(255,255,255,.12)}
-.menu-toggle{display:none;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);font-size:1.1rem;padding:8px;border-radius:8px}
+.menu-toggle{display:none;background:transparent;color:var(--text-on-dark);border:1px solid rgba(255,255,255,.4);font-size:1.1rem;padding:8px;border-radius:8px}
 
 /* Hero */
 .hero{padding:48px 0;background:linear-gradient(90deg, rgba(213,138,51,0.08), rgba(213,138,51,0.03))}
@@ -84,6 +102,13 @@ img.responsive{max-width:100%;height:auto;border-radius:8px}
 	border-radius:10px;
 }
 footer{padding:18px;text-align:center;color:var(--muted);font-size:0.95rem}
+
+/* Acessibilidade */
+.skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.skip-link:focus{left:16px;top:12px;width:auto;height:auto;background:#111;color:#fff;padding:8px 12px;border-radius:8px;z-index:1000}
+
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+[data-theme="dark"] :focus-visible{outline-color:#93c5fd}
 
 /* Centralização da seção "Como Ajudar" na home */
 .home-help{ text-align:center }

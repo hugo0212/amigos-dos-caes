@@ -10,7 +10,8 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/images/dog-rain.jpg">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/styles.css">
+  <!-- Em produção, usar versão minificada -->
+  <link rel="stylesheet" href="dist/css/styles.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>document.documentElement.classList.add('js');</script>
@@ -21,11 +22,15 @@
   <style>main#app{min-height:60vh}</style>
   </head>
 <body>
+<a class="skip-link" href="#app">Pular para o conteúdo</a>
 <header class="site-header">
   <div class="header-inner container">
     <a class="logo" href="#/">Amigos dos Cães</a>
-    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
-    <nav class="nav-links" aria-label="Principal">
+    <div style="display:flex;gap:8px;align-items:center">
+      <button id="theme-toggle" class="menu-toggle" aria-label="Alternar tema" aria-pressed="false">🌓</button>
+      <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="primary-nav">☰</button>
+    </div>
+    <nav id="primary-nav" class="nav-links" aria-label="Principal" aria-hidden="true">
       <a href="#/">Início</a>
       <a href="#/sobre">Sobre</a>
       <a href="#/projetos">Projetos</a>
@@ -38,15 +43,16 @@
     </nav>
   </div>
 </header>
-<main id="app" class="container" aria-live="polite" aria-busy="false"></main>
+<main id="app" class="container" tabindex="-1" aria-live="polite" aria-busy="false"></main>
 <footer>
   <p>&copy; 2025 Amigos dos Cães</p>
   <p style="font-size:.85rem;color:#6b7280">Versão SPA básica com templates JS e roteamento por hash.</p>
 </footer>
-<script src="js/templates.js"></script>
-<script src="js/main.js"></script>
-<script src="js/forms.js"></script>
-<script src="js/charts.js"></script>
-<script src="js/spa.js"></script>
+<!-- Em produção, usar versões minificadas -->
+<script src="dist/js/templates.min.js"></script>
+<script src="dist/js/main.min.js"></script>
+<script src="dist/js/forms.min.js"></script>
+<script src="dist/js/charts.min.js"></script>
+<script src="dist/js/spa.min.js"></script>
 </body>
 </html>

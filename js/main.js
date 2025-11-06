@@ -38,15 +38,44 @@
       toggle.addEventListener('click', function(){
         const open = nav.classList.toggle('open');
         toggle.setAttribute('aria-expanded', String(open));
+        nav.setAttribute('aria-hidden', String(!open));
+      });
+    }
+  }
+
+  function setupTheme(){
+    const root = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    if(saved){ root.setAttribute('data-theme', saved); }
+    else {
+      // usar preferência do sistema
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+    }
+    const btn = document.getElementById('theme-toggle');
+    if(btn){
+      const apply = () => {
+        const isDark = root.getAttribute('data-theme') === 'dark';
+        btn.setAttribute('aria-pressed', String(isDark));
+        btn.title = isDark ? 'Alternar para tema claro' : 'Alternar para tema escuro';
+      };
+      apply();
+      btn.addEventListener('click', () => {
+        const isDark = root.getAttribute('data-theme') === 'dark';
+        const next = isDark ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        apply();
       });
     }
   }
 
   document.addEventListener('DOMContentLoaded', function(){
     setupMobileMenu();
+    setupTheme();
     populateDynamic(document);
   });
 
   // expor para uso pela SPA após render
-  window.AppUtils = { populateDynamic, setupMobileMenu };
+  window.AppUtils = { populateDynamic, setupMobileMenu, setupTheme };
 })();
